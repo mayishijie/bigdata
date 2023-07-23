@@ -48,7 +48,7 @@ hive-site.xml内容：
     <!-- jdbc连接的URL -->
     <property>
         <name>javax.jdo.option.ConnectionURL</name>
-        <value>jdbc:mysql://hadoop10:3306/metastore?useSSL=false</value>
+        <value>jdbc:mysql://hadoop10:3306/hive3?useSSL=false</value>
 </property>
 
     <!-- jdbc连接的Driver-->
@@ -72,7 +72,7 @@ hive-site.xml内容：
     <!-- Hive默认在HDFS的工作目录 -->
     <property>
         <name>hive.metastore.warehouse.dir</name>
-        <value>/user/hive/warehouse</value>
+        <value>/user/hive3/warehouse</value>
     </property>
     
    <!-- Hive元数据存储的验证 -->
@@ -88,6 +88,32 @@ hive-site.xml内容：
     </property>
 </configuration>
 ````
+
+### 2.2.3 初始化元数据
+
+#### 2.2.3.1 登录MySQL
+
+```shell
+[root@hadoop10 software]$ mysql -uroot -proot
+```
+
+
+
+#### 2.2.3.2 新建hive元数据库
+
+```shell
+mysql> create database metastore;
+```
+
+
+
+#### 2.2.3.3 初始化元数据库
+
+```shell
+[root@hadoop10 software]$ schematool -initSchema -dbType mysql -verbose
+```
+
+
 
 ## 2.3 启动hive
 
@@ -129,7 +155,7 @@ hive> select * from test;
     <!-- jdbc连接的URL -->
     <property>
         <name>javax.jdo.option.ConnectionURL</name>
-        <value>jdbc:mysql://hadoop10:3306/metastore?useSSL=false</value>
+        <value>jdbc:mysql://hadoop10:3306/hive3?useSSL=false</value>
 </property>
 
     <!-- jdbc连接的Driver-->
@@ -153,7 +179,7 @@ hive> select * from test;
     <!-- Hive默认在HDFS的工作目录 -->
     <property>
         <name>hive.metastore.warehouse.dir</name>
-        <value>/user/hive/warehouse</value>
+        <value>/user/hive3/warehouse</value>
     </property>
     
    <!-- Hive元数据存储的验证 -->
@@ -216,7 +242,7 @@ hive> select * from test;
     <!-- jdbc连接的URL -->
     <property>
         <name>javax.jdo.option.ConnectionURL</name>
-        <value>jdbc:mysql://hadoop10:3306/metastore?useSSL=false</value>
+        <value>jdbc:mysql://hadoop10:3306/hive3?useSSL=false</value>
 </property>
 
     <!-- jdbc连接的Driver-->
@@ -234,13 +260,13 @@ hive> select * from test;
     <!-- jdbc连接的password -->
     <property>
         <name>javax.jdo.option.ConnectionPassword</name>
-        <value>123456</value>
+        <value>root</value>
 </property>
 
     <!-- Hive默认在HDFS的工作目录 -->
     <property>
         <name>hive.metastore.warehouse.dir</name>
-        <value>/user/hive/warehouse</value>
+        <value>/user/hive3/warehouse</value>
     </property>
     
    <!-- Hive元数据存储的验证 -->
